@@ -36,6 +36,17 @@ Purpose: validate how EDR / AV / mail-gateway / upload pipelines handle disguise
 
 Tests whether the pipeline still unpacks/scans binary containers when the extension claims plain text.
 
+### `samples/obfuscated-html/` — EICAR obfuscated inside HTML/JS
+Each file reconstructs the inert EICAR string at load via a different technique. Tests whether a scanner evaluates/decodes content rather than matching the literal string.
+| File | Technique |
+|------|-----------|
+| `eicar-base64-atob.html` | base64 in `data-` attr, decoded with `atob` |
+| `eicar-charcode.html` | `String.fromCharCode(...)` |
+| `eicar-hex-escape.html` | `\xNN` hex string escapes |
+| `eicar-html-entities.html` | decimal HTML entities, no JS |
+| `eicar-reversed.html` | reversed literal, `split/reverse/join` |
+| `eicar-concat.html` | split + concatenated string literals |
+
 ## Expected result
 A working detection stack flags **every** file. Anything that passes clean = a gap to investigate.
 
