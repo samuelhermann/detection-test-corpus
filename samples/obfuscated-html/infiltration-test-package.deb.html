@@ -1,0 +1,12 @@
+<!-- Inert EICAR/GTUBE container, obfuscated (base64 of real deb bytes, atob+Blob). Authorized detection testing only. -->
+<!doctype html><html><body>
+<p>Reconstructs the real <code>infiltration-test-package.deb</code> bytes client-side.</p>
+<a id="d" download="infiltration-test-package.deb">payload</a>
+<script>
+var b64="ITxhcmNoPgplaWNhci5jb20gICAgICAgMTc5NDkyNzYwOCAgNTAxICAgMjAgICAgMTAwNjQ0ICA2OCAgICAgICAgYApYNU8hUCVAQVBbNFxQWlg1NChQXik3Q0MpN30kRUlDQVItU1RBTkRBUkQtQU5USVZJUlVTLVRFU1QtRklMRSEkSCtIKg==";
+var bin=atob(b64), arr=new Uint8Array(bin.length);
+for(var i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+var blob=new Blob([arr]);
+document.getElementById('d').href=URL.createObjectURL(blob);
+</script>
+</body></html>

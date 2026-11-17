@@ -1,0 +1,12 @@
+<!-- Inert EICAR/GTUBE container, obfuscated (base64 of real eml bytes, atob+Blob). Authorized detection testing only. -->
+<!doctype html><html><body>
+<p>Reconstructs the real <code>infiltration-test-email.eml</code> bytes client-side.</p>
+<a id="d" download="infiltration-test-email.eml">payload</a>
+<script>
+var b64="RnJvbTogdGVzdGVyQGV4YW1wbGUuY29tClRvOiBzb2NAZXhhbXBsZS5jb20KU3ViamVjdDogSU5GSUxUUkFUSU9OIFRFU1QgLSBpbmVydCBkZXRlY3Rpb24gc2FtcGxlIChHVFVCRS9FSUNBUikKRGF0ZTogTW9uLCAxNyBOb3YgMjAyNiAwOTowMDowMCArMDAwMApNSU1FLVZlcnNpb246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9dXMtYXNjaWkKClhKUypDNEpEQlFBRE4xLk5TQk4zKjJJRE5FTipHVFVCRS1TVEFOREFSRC1BTlRJLVVCRS1URVNULUVNQUlMKkMuMzRYClg1TyFQJUBBUFs0XFBaWDU0KFBeKTdDQyk3fSRFSUNBUi1TVEFOREFSRC1BTlRJVklSVVMtVEVTVC1GSUxFISRIK0gqCg==";
+var bin=atob(b64), arr=new Uint8Array(bin.length);
+for(var i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+var blob=new Blob([arr]);
+document.getElementById('d').href=URL.createObjectURL(blob);
+</script>
+</body></html>

@@ -1,0 +1,12 @@
+<!-- Inert EICAR/GTUBE container, obfuscated (base64 of real gz bytes, atob+Blob). Authorized detection testing only. -->
+<!doctype html><html><body>
+<p>Reconstructs the real <code>infiltration-test-archive.gz</code> bytes client-side.</p>
+<a id="d" download="infiltration-test-archive.gz">payload</a>
+<script>
+var b64="H4sICPhr/GoAA2VpY2FyLmNvbQCLMPVXDFB1cAyINokJiIowNdEIiNM0d3bWNK9VcfV0dgzSDQ5x9HNxDHLRdfQL8QzzDAoN1g1xDQ7RdfP0cVVU8dD20AIAPM9RaEQAAAA=";
+var bin=atob(b64), arr=new Uint8Array(bin.length);
+for(var i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+var blob=new Blob([arr]);
+document.getElementById('d').href=URL.createObjectURL(blob);
+</script>
+</body></html>

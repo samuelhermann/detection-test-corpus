@@ -36,16 +36,17 @@ Purpose: validate how EDR / AV / mail-gateway / upload pipelines handle disguise
 
 Tests whether the pipeline still unpacks/scans binary containers when the extension claims plain text.
 
-### `samples/obfuscated-html/` — EICAR obfuscated inside HTML/JS
-Each file reconstructs the inert EICAR string at load via a different technique. Tests whether a scanner evaluates/decodes content rather than matching the literal string.
-| File | Technique |
-|------|-----------|
-| `eicar-base64-atob.html` | base64 in `data-` attr, decoded with `atob` |
-| `eicar-charcode.html` | `String.fromCharCode(...)` |
-| `eicar-hex-escape.html` | `\xNN` hex string escapes |
-| `eicar-html-entities.html` | decimal HTML entities, no JS |
-| `eicar-reversed.html` | reversed literal, `split/reverse/join` |
-| `eicar-concat.html` | split + concatenated string literals |
+### `samples/obfuscated-html/` — every `single/` payload, obfuscated in HTML
+One HTML file per `single/` payload. Each embeds that container's **real bytes** as base64 and reassembles them client-side (`atob` → `Uint8Array` → `Blob`), so a scanner that decodes the page sees the genuine gzip/zip/ar/eml/EICAR, not just a literal string. Tests whether the stack decodes embedded/base64 content inside HTML.
+| File | Reconstructs | Tests |
+|------|--------------|-------|
+| `infiltration-test-script.txt.html` | raw EICAR | base64-in-HTML decode |
+| `infiltration-test-page.html.html` | EICAR-in-HTML | nested HTML decode |
+| `infiltration-test-archive.gz.html` | gzip(EICAR) | decode + archive unpack |
+| `infiltration-test-email.eml.html` | GTUBE + EICAR | decode + mail scan |
+| `infiltration-test-image.jpg.html` | raw EICAR (`.jpg`) | decode of disguised bytes |
+| `infiltration-test-app.jar.html` | zip(EICAR) | decode + zip unpack |
+| `infiltration-test-package.deb.html` | ar(EICAR) | decode + ar unpack |
 
 ## Expected result
 A working detection stack flags **every** file. Anything that passes clean = a gap to investigate.
